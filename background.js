@@ -70,8 +70,7 @@ window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false); //remove listener, no longer needed
     manageCookies.clear_cookies();
     send.get();
-    //inforCapture("2###徐才厚 女星###有关徐才厚与某女星的谣言大起底多维博客###http://blog.dwnews.com/post-454283.html");
-   //inforCapture("1###周杰伦###周杰伦_互动百科###http://www.baike.com/wiki/%E5%91%A8%E6%9D%B0%E4%BC%A6###周杰伦JayChouMtime时光网###http://people.mtime.com/943799/###周杰伦将与昆凌完婚自认绯闻多不是好男人###http://www.chinanews.com/yl/2014/06-25/6316391.shtml");
+    //inforCapture("1###周杰伦###周杰伦_互动百科###http://www.baike.com/wiki/%E5%91%A8%E6%9D%B0%E4%BC%A6###周杰伦JayChouMtime时光网###http://people.mtime.com/943799/###周杰伦将与昆凌完婚自认绯闻多不是好男人###http://www.chinanews.com/yl/2014/06-25/6316391.shtml");
     // inforCapture("2###周杰伦 蔡依琳###蔡依林承认与周杰伦旧情###http://ent.qq.com/a/20130801/005070.htm###3月30日周杰伦蔡依林衡阳演唱会###蔡依林周杰伦在一起13年过往点滴和关于涂鸦的浪漫故事###http://www.19lou.com/forum-125-thread-10111387938958928-1-1.html")
 }, false);
 
