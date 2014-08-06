@@ -1,9 +1,5 @@
 var href = window.location.href;
 
-
-autoRegister();
-
-
 function nextPage(links){ //links-title url clicked
     var divs=document.getElementsByClassName("rc");
     if(divs.length==0)
@@ -15,8 +11,6 @@ function nextPage(links){ //links-title url clicked
     var findFlag=false;
     for(index=0;index<divs.length;index++){
         var atag=divs[index].getElementsByTagName("a")[0];
-        console.log(atag.href);
-        console.log(atag.innerHTML.replace(/[^\u4e00-\u9fa5]/gi,""));
         //change part
         for (var i = 0; i < links.length; i++) {
             if(links[i].clicked)
@@ -26,27 +20,32 @@ function nextPage(links){ //links-title url clicked
                 if(atag.href==links[i].url||atag.innerHTML.replace(/[^\u4e00-\u9fa5]/gi,"").indexOf(links[i].title)>-1)
                 {
                    //open this link
-                   links[i].clicked=true;
-                   atag.click(function(){});
-                   //get();
-                   send_bg_msg_updatelinks(i);
-                   findFlag=true;
+                    links[i].clicked=true;
+                    if(findFlag){
+                           (function(a){
+                              setTimeout(function(){ 
+                              a.target="_blank";
+                              a.click(function(){});},Math.floor(Math.random()*6+2)*1000)
+                            })(atag);
+                    }
+                    else{
+                          atag.target="_blank";
+                          atag.click(function(){});
+                    }
+                    send_bg_msg_updatelinks(i);
+                    findFlag=true;
                    break;
                }
             }
         }
-        if(findFlag)
-          break;
-       
     }
     if(index==divs.length)
     {
+        var intervals=Math.floor(Math.random()*6+2)*1000;//[2-7秒]
 
         setTimeout(function() { 
             var spanclick=null;
             var nav=document.getElementById('nav');
-
-
             var spans=nav.getElementsByTagName('span');
             for(var j=0;j<spans.length;j++){
                 if(spans[j].innerHTML.indexOf('下一页')>-1||(spans[j].innerHTML.indexOf('下一頁')>-1)){
@@ -55,8 +54,7 @@ function nextPage(links){ //links-title url clicked
                     break;
                 }
             }
-        }, 2000);
-        //pn.click(function(){});
+        }, intervals);
     }
 
 }
@@ -79,7 +77,14 @@ function send_bg_msg_info(){
 
 function send_bg_msg_stratery(){
      chrome.extension.sendRequest({type:"searchpage"},function(response){
-       googleSearchPage(response.mode,response.links,response.keyword);
+       for(var i=0;i<response.links.length;i++)
+       {
+          if(!response.links[i].clicked){
+                   googleSearchPage(response.mode,response.links,response.keyword);
+                   break;
+          }
+       }
+
     });
 }
 function send_bg_msg_updatelinks(index){
@@ -87,6 +92,11 @@ function send_bg_msg_updatelinks(index){
      chrome.extension.sendRequest({type:"updateLink"+index},function(response){
        console.log("123");
     });
+}
+function send_bg_msg_aaa(){
+       chrome.extension.sendRequest({type:"openTab"},function(response){
+       console.log("123");
+        });
 }
 
 //only search onne when in http://google.com.hk/ search lw+keyword and submit the form
@@ -156,3 +166,11 @@ function hashCheck() {
     }
 }
 window.addEventListener('hashchange', hashCheck);
+
+window.addEventListener("load", function load(event){
+    window.removeEventListener("load", load, false); //remove listener, no longer needed
+autoRegister();
+}, false);
+
+
+

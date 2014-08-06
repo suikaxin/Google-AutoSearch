@@ -71,7 +71,7 @@ window.addEventListener("load", function load(event){
     manageCookies.clear_cookies();
     send.get();
     //inforCapture("1###周杰伦###周杰伦_互动百科###http://www.baike.com/wiki/%E5%91%A8%E6%9D%B0%E4%BC%A6###周杰伦JayChouMtime时光网###http://people.mtime.com/943799/###周杰伦将与昆凌完婚自认绯闻多不是好男人###http://www.chinanews.com/yl/2014/06-25/6316391.shtml");
-    // inforCapture("2###周杰伦 蔡依琳###蔡依林承认与周杰伦旧情###http://ent.qq.com/a/20130801/005070.htm###3月30日周杰伦蔡依林衡阳演唱会###蔡依林周杰伦在一起13年过往点滴和关于涂鸦的浪漫故事###http://www.19lou.com/forum-125-thread-10111387938958928-1-1.html")
+   // inforCapture("2###周杰伦 蔡依林###蔡依林周杰伦在一起13年过往点滴和关于涂鸦的浪漫故事###http://www.19lou.com/forum-125-thread-10111387938958928-1-1.html###蔡依林承认与周杰伦旧情###http://ent.qq.com/a/20130801/005070.htm")
 }, false);
 
 
@@ -90,19 +90,13 @@ chrome.extension.onRequest.addListener(
             }
             var str=request.type;
             links[parseInt(str[str.length-1])].clicked=true;
-            clickLen++;
-            if(clickLen!=linksLen){
-                var intervals=Math.floor(Math.random()*6+2)*1000;//[2-7秒]
-                    setTimeout(function() { 
-                             var newURL = "http://www.google.com.hk/";
-                             chrome.tabs.create({url: newURL});
-                          }, intervals);
-        
-         
-            }
         }
+       
     }
 
     );
+
+
+
 
 
